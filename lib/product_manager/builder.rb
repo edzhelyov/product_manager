@@ -2,9 +2,13 @@ require 'active_record'
 
 class ProductManager
   class Builder
-    def initialize(name)
+    attr_reader :attributes
+
+    def initialize(name, &block)
       @name = name
       @attributes = []
+
+      instance_exec(&block) if block_given?
     end
 
     def attribute(name)

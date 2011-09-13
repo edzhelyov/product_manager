@@ -10,6 +10,13 @@ class ProductManager
         content.should match "class Laptop < ActiveRecord::Base"
       end
     end
+
+    describe '#initialize' do
+      context 'with block given' do
+        it 'evaluates the block' do
+        end
+      end
+    end
   end
 
 end

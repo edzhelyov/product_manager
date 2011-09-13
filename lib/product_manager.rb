@@ -14,17 +14,4 @@ class ProductManager
     @class_loader.save_class(name, builder.class_definition)
 #    @class_loader.load_class(name)
   end
-
-  private
-
-  def create_class_files(name)
-    File.open("#{name}.rb", 'w+') do |f|
-      f.write <<-EOS
-class ProductManager
-  class #{name.to_s.capitalize}
-  end
-end
-  EOS
-    end
-  end
 end

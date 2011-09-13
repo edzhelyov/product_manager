@@ -37,7 +37,7 @@ class ProductManager
       loader.load_class(:laptop)
 
       Laptop.table_name.should eq 'laptops'
-      Laptop.columns.should eq ["ram", "display"]
+      Laptop.column_names.should eq ["id", "ram", "display"]
     end
   end
 

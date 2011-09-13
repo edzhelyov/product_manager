@@ -1,3 +1,5 @@
+require 'product_manager/class_loader'
+
 class ProductManager
   class << self
     def create(name, &block)

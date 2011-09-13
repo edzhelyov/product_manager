@@ -3,8 +3,9 @@ require 'spec_helper'
 class ProductManager
 
   describe ClassLoader do
+    let(:existing_path) { File.dirname(__FILE__) + '/classes/' }
+
     context 'when created' do
-      let(:existing_path) { File.dirname(__FILE__) }
       let(:non_existing_path) { File.dirname(__FILE__) + '/abracadabra/' }
 
       it 'require load path' do
@@ -16,6 +17,22 @@ class ProductManager
         lambda {
           ClassLoader.new(non_existing_path)
         }.should raise_error(ClassLoader::NonexistingLoadPathError)
+      end
+    end
+
+    describe '#load_class' do
+      after :each do
+        ProductManager.send(:remove_const, 'Laptop')
+      end
+
+      it 'load the class file if exists' do
+        loader = ClassLoader.new(existing_path)
+
+        ProductManager.const_defined?('Laptop').should be_false
+
+        loader.load_class(:laptop)
+
+        ProductManager.const_defined?('Laptop').should be_true
       end
     end
   end

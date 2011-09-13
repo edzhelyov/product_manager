@@ -9,5 +9,9 @@ class ProductManager
 
       @load_path = load_path
     end
+
+    def load_class(name)
+      load load_path + "#{name}.rb"
+    end
   end
 end

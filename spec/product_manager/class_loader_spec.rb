@@ -35,6 +35,24 @@ class ProductManager
         ProductManager.const_defined?('Laptop').should be_true
       end
     end
+
+    describe '#save_class' do
+      let(:filename) { existing_path + "test.rb" }
+
+      after :each do
+        File.unlink(filename)
+      end
+
+      it 'save file with the given content' do
+        loader = ClassLoader.new(existing_path)
+
+        File.exists?(filename).should be_false
+
+        loader.save_class('test', 'Testing')
+        
+        content = File.read(filename).should eq 'Testing'
+      end
+    end
   end
 
 end

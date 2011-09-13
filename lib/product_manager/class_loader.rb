@@ -11,7 +11,17 @@ class ProductManager
     end
 
     def load_class(name)
-      load load_path + "#{name}.rb"
+      load filename(name)
+    end
+
+    def save_class(name, content)
+      File.open(filename(name), 'w+') do |f|
+        f << content
+      end
+    end
+
+    def filename(name)
+      load_path + "#{name}.rb"
     end
   end
 end

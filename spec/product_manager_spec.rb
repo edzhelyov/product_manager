@@ -11,7 +11,7 @@ class ProductManager
           Builder.stub(:new).and_return(builder)
 
           builder.should_receive(:class_definition).and_return('class definition')
-          loader.should_receive(:save_class).with('class definition')
+          loader.should_receive(:save_class).with(:laptop, 'class definition')
 
           manager = ProductManager.new(loader, Builder)
 
@@ -27,7 +27,7 @@ class ProductManager
 
           builder.should_receive(:instance_exec)
           builder.should_receive(:class_definition).and_return('class definition')
-          loader.should_receive(:save_class).with('class definition')
+          loader.should_receive(:save_class).with(:laptop, 'class definition')
 
           manager = ProductManager.new(loader, Builder)
 

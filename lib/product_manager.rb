@@ -11,7 +11,7 @@ class ProductManager
     builder = @builder_class.new(name)
     builder.instance_exec(&block) if block_given?
 
-    @class_loader.save_class(builder.class_definition)
+    @class_loader.save_class(name, builder.class_definition)
 #    @class_loader.load_class(name)
   end
 

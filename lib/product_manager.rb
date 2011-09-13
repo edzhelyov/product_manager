@@ -8,8 +8,7 @@ class ProductManager
   end
 
   def create(name, &block)
-    builder = @builder_class.new(name)
-    builder.instance_exec(&block) if block_given?
+    builder = @builder_class.new(name, &block)
 
     @class_loader.save_class(name, builder.class_definition)
 #    @class_loader.load_class(name)

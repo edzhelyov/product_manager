@@ -23,18 +23,18 @@ class ProductManager
         it 'evaluate the block in the context of the newly created class' do
           loader = mock(ClassLoader)
           builder = mock(Builder)
-          Builder.stub(:new).and_return(builder)
+          block = Proc.new do
+            attribute :brand
+            attribute :ram
+          end
+          Builder.should_receive(:new).with(:laptop, &block).and_return(builder)
 
-          builder.should_receive(:instance_exec)
           builder.should_receive(:class_definition).and_return('class definition')
           loader.should_receive(:save_class).with(:laptop, 'class definition')
 
           manager = ProductManager.new(loader, Builder)
 
-          manager.create :laptop do
-            attribute :brand
-            attribute :ram
-          end
+          manager.create :laptop, &block
         end
       end
     end

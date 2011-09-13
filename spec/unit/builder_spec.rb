@@ -13,7 +13,12 @@ class ProductManager
 
     describe '#initialize' do
       context 'with block given' do
-        it 'evaluates the block' do
+        it 'evaluates the block into the context of self' do
+          builder = Builder.new(:laptop) do
+            attribute :ram
+          end
+
+          builder.attributes.should eq [:ram]
         end
       end
     end

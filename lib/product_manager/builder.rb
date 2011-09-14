@@ -1,4 +1,5 @@
 require 'active_record'
+require 'active_support/inflector'
 
 class ProductManager
   class Builder
@@ -21,15 +22,18 @@ class ProductManager
      migration = Class.new(ActiveRecord::Migration)
      migration.class_eval <<-EOS
        def self.up
-         create_table :laptops do |t|
-           t.string :ram
-           t.string :display
+         create_table :#{@name.to_s.tableize} do |t|
+           #{create_columns}
          end
        end
      EOS
 
      migration.verbose = false
      migration.migrate :up
+    end
+
+    def create_columns
+      @attributes.map { |x| "t.string :#{x}" }.join("\n")
     end
 
     def class_definition

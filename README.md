@@ -7,19 +7,19 @@ Creates the proper product schema and keep track of individual products.
 
 1. Describe product
 
-    ProductManager.create :laptop do
-      attribute :display, Integer
-      attribute :os, String
+      ProductManager.create :laptop do
+        attribute :display, Integer
+        attribute :os, String
 
-      relation :ram, Integer
-    end
+        relation :ram, Integer
+      end
 
 Then you can access the laptop product by `ProductManager::Laptop` which is ActiveRecord class.
 
 2. List available product
 
-    ProductManager.list
-    -> [Laptop, Tablet, TV ...]
+      ProductManager.list
+      -> [Laptop, Tablet, TV ...]
 
 This gives you the list of the available products
 

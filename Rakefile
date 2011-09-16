@@ -14,3 +14,8 @@ require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
+
+desc 'Drop the database in the Rails app used for testing'
+task :clean do
+  `cd spec/dummy && rake db:drop RAILS_ENV=test`
+end

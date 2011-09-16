@@ -17,5 +17,6 @@ task :default => :spec
 
 desc 'Drop the database in the Rails app used for testing'
 task :clean do
+  `rm -r spec/dummy/db/migrate`
   `cd spec/dummy && rake db:drop RAILS_ENV=test`
 end

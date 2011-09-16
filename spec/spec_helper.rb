@@ -11,6 +11,14 @@ ActionMailer::Base.default_url_options[:host] = "test.com"
 
 Rails.backtrace_cleaner.remove_silencers!
 
+# Copy migration file if no one exists
+unless File.exists?(File.expand_path('../dummy/db/migrate', __FILE__))
+  require 'generators/product_manager/product_manager_generator'
+  Dir.chdir(File.expand_path('../dummy', __FILE__)) do
+    ProductManagerGenerator.new.create_migration_file
+  end
+end
+
 # Run any available migration
 ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__)
 

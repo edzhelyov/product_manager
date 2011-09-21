@@ -11,4 +11,15 @@ describe ProductType do
       ProductAttributeType.first.name.should eq 'ram'
     end
   end
+
+  describe '.list' do
+    it 'return list of all available types' do
+      ProductType.define :Laptop
+      ProductType.define :Tablet
+
+      ProductType.list.size.should eq 2
+      ProductType.list.first.name.should eq 'Laptop'
+      ProductType.list.last.name.should eq 'Tablet'
+    end
+  end
 end

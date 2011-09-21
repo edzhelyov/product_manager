@@ -2,10 +2,6 @@ class Product < ActiveRecord::Base
   belongs_to :product_type
   has_many :product_attributes
 
-  def self.list
-    ProductType.all
-  end
-
   def attributes
     product_type.attributes
   end

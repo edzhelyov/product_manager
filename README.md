@@ -21,12 +21,12 @@ into the create_table :products block.
 
 # API
 
-* `Product.list` - returns list with available product types, currently this returns ProductType objects
+* `ProductType.list` - returns list with available product types
 * `ProductType.define(name, &block)` - creates a new product type and pass the block to it
 
 * `Product#attributes` - return the attributes defined for this type
-* `Product#get_attribute_value` - return the value of given attribute
-* `Product#set_attribute_value` - set a value on given attribute
+* `Product#get_attribute_value(name)` - return the value of given attribute
+* `Product#set_attribute_value(name, value)` - set a value on given attribute
 
 # Testing
 

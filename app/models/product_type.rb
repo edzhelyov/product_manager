@@ -9,6 +9,10 @@ class ProductType < ActiveRecord::Base
     type
   end
 
+  def self.list
+    all
+  end
+
   def attribute(name)
     product_attribute_types.create :name => name
   end

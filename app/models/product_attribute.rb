@@ -5,4 +5,12 @@ class ProductAttribute < ActiveRecord::Base
   def name
     product_attribute_type.name
   end
+
+  def value=(val)
+    write_attribute(:value, type_cast(val))
+  end
+
+  def type_cast(val)
+    product_attribute_type.type_cast(val)
+  end
 end

@@ -13,7 +13,7 @@ class ProductType < ActiveRecord::Base
     all
   end
 
-  def attribute(name)
+  def attribute(name, type)
     product_attribute_types.create :name => name
   end
   alias :add_attribute :attribute

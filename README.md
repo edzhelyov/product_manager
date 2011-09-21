@@ -19,33 +19,14 @@ They are used to implement the EAV model that enable the dynamic attributes. You
 should specify additional columns that you expect all of your products to share
 into the create_table :products block.
 
-All product manipulations are done through the Product object.
-
 # API
 
 * `Product.list` - returns list with available product types, currently this returns ProductType objects
-* `Product.define` - creates a new product type and pass the block to the newly created product type object for execution.
+* `ProductType.define(name, &block)` - creates a new product type and pass the block to it
 
 * `Product#attributes` - return the attributes defined for this type
 * `Product#get_attribute_value` - return the value of given attribute
 * `Product#set_attribute_value` - set a value on given attribute
-
-# Futher directions
-
-There are two main functionalities:
-
-* When you manipulate Product types and attirbutes, which we will call product metadata
-* When you manipulate specific product instance
-
-Manipulating Product types can be done with the .list method that return list of
-all available types and manipulation of attributes with the actual ProductType object.
-
-With a product instance you need to have list of the attributes, their values
-and a way to set them.  Now I prefer to expose regular AR API for the dynamic 
-attributes, so these operations are possible:
-
-        laptop.ram = '1GB'
-        laptop.update_attributes(:price => 10.0, :display => '19"')
 
 # Testing
 
@@ -59,7 +40,7 @@ rails application.
 
 After you have this running, you can create new Product type with this code:
 
-        laptop = Product.define :Laptop do
+        laptop = ProductType.define :Laptop do
           attribute :ram
           attribute :display
           attribute :color

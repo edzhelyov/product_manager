@@ -1,12 +1,8 @@
 class ProductAttribute < ActiveRecord::Base
   belongs_to :product
-  belongs_to :product_attribute_value
+  belongs_to :product_attribute_type
 
   def name
-    product_attribute_value.name
-  end
-
-  def value
-    product_attribute_value.value
+    product_attribute_type.name
   end
 end

@@ -24,9 +24,8 @@ class Product < ActiveRecord::Base
 
   def set_attribute_value(name, value)
     attr_type = attribute_type_with_name(name)
-    attr_value = ProductAttributeValue.where(:product_attribute_type_id => attr_type.id).find_or_create_by_value(value)
 
-    product_attributes.create :product_attribute_value => attr_value
+    product_attributes.create :product_attribute_type => attr_type, :value => value
   end
 
   def attribute_with_name(name)

@@ -1,3 +1,3 @@
 class ProductAttributeType < ActiveRecord::Base
-  has_many :product_attribute_values, :dependent => :destroy
+  has_many :product_attributes, :dependent => :destroy
 end

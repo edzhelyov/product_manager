@@ -7,7 +7,7 @@ class ProductAttributeType < ActiveRecord::Base
     klass = ActiveRecord::ConnectionAdapters::Column
 
     return nil if value.nil?
-    case type
+    case type.to_sym
     when :string    then value
     when :text      then value
     when :integer   then value.to_i rescue value ? 1 : 0

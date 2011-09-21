@@ -10,6 +10,10 @@ class ProductAttribute < ActiveRecord::Base
     write_attribute(:value, type_cast(val))
   end
 
+  def value
+    type_cast(read_attribute(:value))
+  end
+
   def type_cast(val)
     product_attribute_type.type_cast(val)
   end

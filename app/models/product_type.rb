@@ -2,6 +2,13 @@ class ProductType < ActiveRecord::Base
   has_many :products
   has_many :product_attribute_types
 
+  def self.define(name, &block)
+    type = create(:name => name)
+
+    type.instance_exec(&block) if block_given?
+    type
+  end
+
   def attribute(name)
     product_attribute_types.create :name => name
   end

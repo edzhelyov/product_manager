@@ -6,13 +6,6 @@ class Product < ActiveRecord::Base
     ProductType.all
   end
 
-  def self.define(name, &block)
-    type = ProductType.create :name => name
-
-    type.instance_exec(&block) if block_given?
-    type
-  end
-
   def attributes
     product_type.attributes
   end

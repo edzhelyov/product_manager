@@ -63,11 +63,10 @@ Then create some products:
 For now dynamically created attributes and the static ones defined on products table use different APIs for manipulation.
 I will try to unify them, if that is possible.
 
-# TODO
+# ActiveRecord's attributes interface
 
-* Put all classes including the models into ProductManager namespace.
-* Remove the product_attribute_values table, this simplify things up.
-* Create module and encapsulate the methods for working with the dynamic
-  attributes.
-* Try wrap the AR standard interface to work the dynamic attributes too.
-  Maybe with #method_missing or #define_method.
+There is a attribute accessor for each dynamic attribute, making them work with
+ActiveRecord's methods like #update_attributes, etc.
+
+Because of the way dynamic attributes are initialized you can't pass them directly to #create or #new methods, you need to have the object created without any reference to dynamic attribute or you will receive NoMethodError exception.
+

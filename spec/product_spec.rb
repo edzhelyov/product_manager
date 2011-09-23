@@ -86,4 +86,18 @@ describe Product do
     end
 
   end
+
+  context 'with ActiveRecord attributes related methods' do
+    it 'works with #update_attributes' do
+      product.update_attributes(:price => 10, :ram => 5.0)
+
+      product.get_dynamic_attribute(:ram).should eq 5
+    end
+
+    it 'works with #new' do
+      product = @pt.products.create :price => 10, :ram => 6.0
+
+      product.get_dynamic_attribute(:ram).should eq 6
+    end
+  end
 end

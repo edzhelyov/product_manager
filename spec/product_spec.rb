@@ -8,6 +8,7 @@ describe Product do
   end
 
   let(:product) { @pt.products.create }
+  let(:new_product) { @pt.products.build }
 
   describe '#get_dynamic_attribute' do
     it 'return nil if there is no value' do
@@ -35,6 +36,13 @@ describe Product do
 
       product.get_dynamic_attribute(:display).should eq (100)
       ProductAttribute.count.should eq (1)
+    end
+
+    it 'create dynamic attribute on new record' do
+      new_product.set_dynamic_attribute(:display, 99.0)
+
+      new_product.get_dynamic_attribute(:display).should eq(99)
+      new_product.should be_new_record
     end
   end
 

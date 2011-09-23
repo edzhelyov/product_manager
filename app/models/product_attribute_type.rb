@@ -2,6 +2,7 @@ class ProductAttributeType < ActiveRecord::Base
   has_many :product_attributes, :dependent => :destroy
 
   # Casts value (which is a String) to an appropriate instance.
+  # This is basically a copy of the same method in AR::ConnectionAdapters::Column
   def type_cast(value)
     klass = ActiveRecord::ConnectionAdapters::Column
 

@@ -24,7 +24,6 @@ into the create_table :products block.
 * `ProductType.list` - returns list with available product types
 * `ProductType.define(name, &block)` - creates a new product type and pass the block to it
 
-* `Product#attributes` - return the attributes defined for this type
 * `Product#get_attribute_value(name)` - return the value of given attribute
 * `Product#set_attribute_value(name, value)` - set a value on given attribute
 
@@ -41,14 +40,14 @@ rails application.
 After you have this running, you can create new Product type with this code:
 
         laptop = ProductType.define :Laptop do
-          attribute :ram
-          attribute :display
-          attribute :color
+          has :ram, :integer
+          has :display, :integer
+          has :color, :string
         end
 
 Then you can add additional attributes to that type:
 
-      laptop.add_attribute(:os)
+      laptop.add_attribute(:os, :string)
 
 or remove one:
 
@@ -58,7 +57,7 @@ Then create some products:
 
       l = laptop.products.create :price => 10.0, :description => 'Cheap laptop'
       l.set_attribute_value(:ram, '1GB')
-      l.set_attribute_value(:display, '13"')
+      l.set_attribute_value(:display, 13)
       l.set_attribute_value(:os, 'Windows 7')
 
 For now dynamically created attributes and the static ones defined on products table use different APIs for manipulation.

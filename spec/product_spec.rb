@@ -22,20 +22,20 @@ describe Product do
     end
   end
 
-#  describe '#set_dynamic_attribute' do
-#    it 'type cast the value before saving' do
-#      product.set_dynamic_attribute(:display, 'a')
-#
-#      product.get_dynamic_attribute(:display).should eq(0)
-#    end
-#
-#    it 'create the same attribute only once' do
-#      product.set_dynamic_attribute(:display, 10)
-#      product.set_dynamic_attribute(:display, 100.0)
-#
-#      product.get_dynamic_attribute(:display).should eq (100)
-#      ProductAttribute.count.should eq (1)
-#    end
-#  end
+  describe '#set_dynamic_attribute' do
+    it 'type cast the value before saving' do
+      product.set_dynamic_attribute(:display, 'a')
+
+      product.get_dynamic_attribute(:display).should eq(0)
+    end
+
+    it 'create the same attribute only once' do
+      product.set_dynamic_attribute(:display, 10)
+      product.set_dynamic_attribute(:display, 100.0)
+
+      product.get_dynamic_attribute(:display).should eq (100)
+      ProductAttribute.count.should eq (1)
+    end
+  end
 
 end

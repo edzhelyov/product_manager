@@ -7,12 +7,12 @@ class Product < ActiveRecord::Base
   end
 
   def set_dynamic_attribute(name, value)
-    attr_type = attribute_type_with_name(name)
+    attr_type = product_type.type_for(name)
 
     attr = ProductAttribute.
-      find_or_create_by_product_id_and_product_attribute_type_id(id, attr_type.id)
+      find_or_initialize_by_product_id_and_product_attribute_type_id(id, attr_type.id)
+
     attr.value = value
-    attr.save
-    attr
+    product_attributes << attr
   end
 end

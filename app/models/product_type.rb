@@ -13,6 +13,11 @@ class ProductType < ActiveRecord::Base
     all
   end
 
+  def type_for(name)
+    name = name.to_s
+    product_attribute_types.detect { |x| x.name == name }
+  end
+
   def attribute(name, type)
     product_attribute_types.create :name => name, :type => type
   end

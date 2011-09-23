@@ -1,17 +1,12 @@
 class Product < ActiveRecord::Base
   belongs_to :product_type
-  has_many :product_attributes
+  has_many :product_attributes, :extend => FindersByAtrributeName
 
-  def attributes
-    product_type.attributes
+  def get_dynamic_attribute(name)
+    product_attributes.with_name(name).value
   end
 
-  def get_attribute_value(name)
-    attr = attribute_with_name(name)
-    attr ? attr.value : nil
-  end
-
-  def set_attribute_value(name, value)
+  def set_dynamic_attribute(name, value)
     attr_type = attribute_type_with_name(name)
 
     attr = ProductAttribute.
@@ -19,18 +14,5 @@ class Product < ActiveRecord::Base
     attr.value = value
     attr.save
     attr
-  end
-
-  def attribute_with_name(name)
-    product_attributes.detect { |attr| attr.name == name.to_s }
-  end
-
-  def attribute_type_with_name(name)
-    attributes.detect { |attr| attr.name == name.to_s }
-  end
-
-  def attribute_values(name)
-    attr_type = attribute_type_with_name(name)
-    attr_type.product_attribute_values
   end
 end

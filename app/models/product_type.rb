@@ -13,6 +13,10 @@ class ProductType < ActiveRecord::Base
     all
   end
 
+  def dynamic_attributes
+    product_attribute_types.all
+  end
+
   def type_for(name)
     name = name.to_s
     product_attribute_types.detect { |x| x.name == name }

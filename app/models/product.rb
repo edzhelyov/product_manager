@@ -2,6 +2,11 @@ class Product < ActiveRecord::Base
   belongs_to :product_type
   has_many :product_attributes, :extend => FindersByAtrributeName
 
+  def initialize(attributes = nil)
+    super
+    define_dynamic_accessors
+  end
+
   def get_dynamic_attribute(name)
     product_attributes.with_name(name).value
   end
@@ -24,5 +29,24 @@ class Product < ActiveRecord::Base
   def find_or_create_attribute(type)
     ProductAttribute.
       find_or_initialize_by_product_id_and_product_attribute_type_id(id, type.id)
+  end
+
+  def define_dynamic_accessors
+    product_type.dynamic_attributes.each do |attr|
+      define_dynamic_writer(attr.name)
+      define_dynamic_reader(attr.name)
+    end
+  end
+
+  def define_dynamic_writer(name)
+    singleton_class.send(:define_method, "#{name}=".to_sym) do |value|
+      set_dynamic_attribute(name, value)
+    end
+  end
+
+  def define_dynamic_reader(name)
+    singleton_class.send(:define_method, name) do
+      get_dynamic_attribute(name)
+    end
   end
 end

@@ -4,7 +4,7 @@ describe ProductType do
   describe '.define' do
     it 'create new Product type with the suppplied attributes in the block' do
       ProductType.define :Laptop do
-        attribute :ram, :string
+        has :ram, :string
       end
 
       ProductType.first.name.should eq 'Laptop'

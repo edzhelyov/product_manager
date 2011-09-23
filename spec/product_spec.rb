@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Product do
   before :each do
     @pt = ProductType.define :Laptop do
-      attribute :display, :integer
+      has :display, :integer
     end
   end
 

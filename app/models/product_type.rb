@@ -18,20 +18,12 @@ class ProductType < ActiveRecord::Base
     product_attribute_types.detect { |x| x.name == name }
   end
 
-  def attribute(name, type)
+  def add_attribute(name, type)
     product_attribute_types.create :name => name, :data_type => type
   end
-  alias :add_attribute :attribute
+  alias :has :add_attribute
 
   def remove_attribute(name)
     product_attribute_types.find_by_name(name).destroy
-  end
-
-  def attributes
-    product_attribute_types.all
-  end
-
-  def attribute_names
-    attributes.map(&:name)
   end
 end

@@ -13,7 +13,7 @@ class CreateProducts < ActiveRecord::Migration
     create_table :product_attribute_types do |t|
       t.integer :product_type_id
       t.string :name
-      t.string :type
+      t.string :data_type
     end
 
     create_table :product_attributes do |t|

@@ -1,13 +1,12 @@
 class ProductAttributeType < ActiveRecord::Base
   has_many :product_attributes, :dependent => :destroy
-  set_inheritance_column :_type_ # `type` is used to hold the actual type of this attribute
 
   # Casts value (which is a String) to an appropriate instance.
   def type_cast(value)
     klass = ActiveRecord::ConnectionAdapters::Column
 
     return nil if value.nil?
-    case type.to_sym
+    case data_type.to_sym
     when :string    then value
     when :text      then value
     when :integer   then value.to_i rescue value ? 1 : 0

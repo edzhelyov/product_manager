@@ -22,4 +22,26 @@ describe ProductType do
       ProductType.list.last.name.should eq 'Tablet'
     end
   end
+
+  describe '#remove_attribute' do
+    let(:type) do
+      ProductType.define :Laptop do
+        has :ram, :string
+      end
+    end
+
+    it 'remove the attribute when available' do
+      type.product_attribute_types.size.should eq 1
+    
+      type.remove_attribute :ram
+
+      type.product_attribute_types.size.should eq 0
+    end
+
+    it 'raises UnknownAttributeError when there is no such attribute' do
+      lambda {
+        type.remove_attribute :unknown
+      }.should raise_error(ActiveRecord::UnknownAttributeError)
+    end
+  end
 end

@@ -44,6 +44,12 @@ describe Product do
       new_product.get_dynamic_attribute(:display).should eq(99)
       new_product.should be_new_record
     end
+
+    it 'raise error on invalid attribute' do
+      lambda {
+        product.set_dynamic_attribute(:unknown, 10)
+      }.should raise_error(ActiveRecord::UnknownAttributeError)
+    end
   end
 
 end

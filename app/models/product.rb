@@ -2,7 +2,12 @@ class Product < ActiveRecord::Base
   belongs_to :product_type
   has_many :product_attributes, :extend => FindersByAtrributeName
 
-  def initialize(attributes = nil)
+  # This code is run in AR::Base#initialize to populate the product_type_id
+  # field just before setting the attributes.
+  # Hooking here allow us to have access to the ProductType association, just
+  # before the assignment of the attributes' values, so we can define our
+  # dynamic setters
+  def populate_with_current_scope_attributes
     super
     define_dynamic_accessors
   end

@@ -66,7 +66,4 @@ I will try to unify them, if that is possible.
 # ActiveRecord's attributes interface
 
 There is a attribute accessor for each dynamic attribute, making them work with
-ActiveRecord's methods like #update_attributes, etc.
-
-Because of the way dynamic attributes are initialized you can't pass them directly to #create or #new methods, you need to have the object created without any reference to dynamic attribute or you will receive NoMethodError exception.
-
+ActiveRecord's methods like #update_attributes, #new, #create, etc.

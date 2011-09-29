@@ -1,4 +1,4 @@
-module FindersByAtrributeName
+module FindersByAttributeName
   class NullObject
     attr_reader :name, :value
 

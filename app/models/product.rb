@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
   belongs_to :product_type
-  has_many :product_attributes, :extend => FindersByAtrributeName
+  has_many :product_attributes, :extend => FindersByAttributeName
 
   # This code is run in AR::Base#initialize to populate the product_type_id
   # field just before setting the attributes.

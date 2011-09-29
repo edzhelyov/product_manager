@@ -12,6 +12,11 @@ class Product < ActiveRecord::Base
     define_dynamic_accessors
   end
 
+  def init_with(coder)
+    super
+    define_dynamic_accessors
+  end
+
   def get_dynamic_attribute(name)
     product_attributes.with_name(name).value
   end

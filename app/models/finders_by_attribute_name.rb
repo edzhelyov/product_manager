@@ -10,6 +10,7 @@ module FindersByAttributeName
 
   def with_name(name)
     name = name.to_s
+    reload unless loaded?
     proxy_target.detect { |x| x.name == name } || NullObject.new(name)
   end
 end

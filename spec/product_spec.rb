@@ -100,4 +100,19 @@ describe Product do
       product.get_dynamic_attribute(:ram).should eq 6
     end
   end
+
+  context 'when loaded from the database' do
+    it 'has dynamic attribute accessors defined' do
+      p = Product.find(product.id)
+
+      p.ram = 15
+      p.save
+      p.get_dynamic_attribute(:ram).should eq 15
+
+      p = Product.find(product.id)
+
+      p.get_dynamic_attribute(:ram).should eq 15
+      p.ram.should eq 15
+    end
+  end
 end

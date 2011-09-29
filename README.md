@@ -11,21 +11,19 @@ The migration create the following tables:
 
 * product_types
 * product_attribute_types
-* product_attribute_values
 * product_attributes
 * products
 
-They are used to implement the EAV model that enable the dynamic attributes. You
-should specify additional columns that you expect all of your products to share
-into the create_table :products block.
+The `products` table has two columns created by default `price` and `description`. You should edit the migration file if you
+want to add or remove columns.
 
 # API
 
 * `ProductType.list` - returns list with available product types
 * `ProductType.define(name, &block)` - creates a new product type and pass the block to it
 
-* `Product#get_attribute_value(name)` - return the value of given attribute
-* `Product#set_attribute_value(name, value)` - set a value on given attribute
+* `Product#get_dynamic_attribute(name)` - return the value of given attribute
+* `Product#set_dynamic_attribute(name, value)` - set a value on given attribute
 
 # Testing
 
@@ -56,12 +54,9 @@ or remove one:
 Then create some products:
 
       l = laptop.products.create :price => 10.0, :description => 'Cheap laptop'
-      l.set_attribute_value(:ram, '1GB')
-      l.set_attribute_value(:display, 13)
-      l.set_attribute_value(:os, 'Windows 7')
-
-For now dynamically created attributes and the static ones defined on products table use different APIs for manipulation.
-I will try to unify them, if that is possible.
+      l.set_dynamic_attribute(:ram, '1GB')
+      l.set_dynamic_attribute(:display, 13)
+      l.set_dynamic_attribute(:os, 'Windows 7')
 
 # ActiveRecord's attributes interface
 

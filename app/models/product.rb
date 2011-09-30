@@ -2,6 +2,10 @@ class Product < ActiveRecord::Base
   belongs_to :product_type
   has_many :product_attributes, :extend => FindersByAttributeName
 
+  def self.of_type(type)
+    ProductType.find_by_name(type).products
+  end
+
   # This code is run in AR::Base#initialize to populate the product_type_id
   # field just before setting the attributes.
   # Hooking here allow us to have access to the ProductType association, just

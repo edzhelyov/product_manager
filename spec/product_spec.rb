@@ -10,6 +10,14 @@ describe Product do
   let(:product) { @pt.products.create }
   let(:new_product) { @pt.products.new }
 
+  describe '.of_type' do
+    it 'return scoped relation with the given type' do
+      lambda {
+        p = Product.of_type('Laptop').create(:price => 6, :ram => 1)
+      }.should change(Product, :count)
+    end
+  end
+
   describe '#get_dynamic_attribute' do
 
     it 'return nil if there is no value' do

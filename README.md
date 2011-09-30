@@ -21,6 +21,7 @@ want to add or remove columns.
 
 * `ProductType.list` - returns list with available product types
 * `ProductType.define(name, &block)` - creates a new product type and pass the block to it
+* `ProductType.of_type(type_name)` - return scoped Product relation of the given type, which you can chain with #new, #create, etc
 
 * `Product#get_dynamic_attribute(name)` - return the value of given attribute
 * `Product#set_dynamic_attribute(name, value)` - set a value on given attribute
@@ -62,3 +63,27 @@ Then create some products:
 
 There is a attribute accessor for each dynamic attribute, making them work with
 ActiveRecord's methods like #update_attributes, #new, #create, etc.
+
+This way the example above can be rewritten as follows:
+
+      l.ram = '1GB'
+      l.display = 13
+      l.os = 'Windows 7'
+
+Or even better:
+
+      params[:product] = {:ram => '1GB', :display => 13, :os => 'Windows 7'}
+      l.update_attributes(params[:product])
+
+# Application usage
+
+Because every product require a type to work correctly you can manipulate products by two ways.
+One is to work directly with the given ProductType:
+
+      type = ProductType.find(type_id) || ProductType.find_by_name(type_name)
+      type.products.create(params[:product])
+
+The other is by using the .of_type proxy method on the Product class:
+
+      product = Product.of_type(params[:type]).new 
+      product.update_attributes(params[:product])
